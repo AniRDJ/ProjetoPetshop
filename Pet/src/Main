@@ -1,0 +1,41 @@
+import java.sql.SQLException;
+import java.util.List;
+
+public class Main {
+
+    public static void main(String[] args) {
+        PetService petService = new PetService();
+        TratamentoService tratamentoService = new TratamentoService();
+
+        
+        Pet pet = new Pet();
+        pet.setNome("Rex");
+        pet.setEspecie("Cachorro");
+        pet.setIdade(5);
+        try {
+            petService.adicionarPet(pet);
+            System.out.println("Pet adicionado com sucesso!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+       
+        try {
+            List<Pet> pets = petService.listarPets();
+            pets.forEach(p -> System.out.println("Pet: " + p.getNome() + ", Espécie: " + p.getEspecie()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Atualizando o pet
+        pet.setIdade(6);
+        try {
+            petService.atualizarPet(pet);
+            System.out.println("Pet atualizado com sucesso!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Deletando o pet
+        try {
+            petService.deletarPet(p
